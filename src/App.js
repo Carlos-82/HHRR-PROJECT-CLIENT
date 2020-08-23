@@ -1,20 +1,35 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Switch, Route } from "react-router-dom";
+import { Switch } from "react-router-dom";
+import AuthProvider from "./lib/AuthProvider";
 
 import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import CompanyCreate from "./pages/CompanyCreate";
+import Private from "./pages/Private";
+import AnonRoute from "./components/AnonRoute";
+import PrivateRoute from "./components/PrivateRoute";
 
 class App extends Component {
   render() {
     return (
-      <div className='container'>
-        <Navbar />
+      <AuthProvider>
+        <div className="container">
+          <Navbar />
 
-        <Switch>
-          <Route exact path='/' component={Home} />
-        </Switch>
-      </div>
+          <Switch>
+            <AnonRoute exact path="/signup" component={Signup} />
+            <AnonRoute exact path="/login" component={Login} />
+            <PrivateRoute exact path="/private" component={Private} />
+            <PrivateRoute
+              exact
+              path="/private/company/create"
+              component={CompanyCreate}
+            />
+          </Switch>
+        </div>
+      </AuthProvider>
     );
   }
 }
