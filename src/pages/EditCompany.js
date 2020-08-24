@@ -1,20 +1,19 @@
 import React, { Component } from "react";
 import adminCompany from "../lib/adminCompany";
 
-class CompanyCreate extends Component {
-  state = {
-    registerName: "",
-    tradeName: "",
-    CIF: "",
-    CCC: "",
-    address: "",
-    postalCode: "",
-    country: "",
-    registerDate: "",
-    legalPersonality: "",
-    colectiveAgreement: "",
-    mutualInsurance: "",
-  };
+class CompanyEdit extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount() {
+    console.log(this.props.history);
+    adminCompany.getCompany().then((company) => {
+      console.log(company);
+      this.setState(company);
+    });
+  }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
@@ -31,44 +30,39 @@ class CompanyCreate extends Component {
       legalPersonality,
       colectiveAgreement,
       mutualInsurance,
-      error,
     } = this.state;
 
-    const newCompany = {
-      registerName,
-      tradeName,
-      CIF,
-      CCC,
-      address,
-      postalCode,
-      country,
-      registerDate,
-      legalPersonality,
-      colectiveAgreement,
-      mutualInsurance,
-    };
-
+    const id = this.props.match.params.id;
     adminCompany
-      .createCompany(newCompany)
+      .editCompany(id, {
+        registerName,
+        tradeName,
+        CIF,
+        CCC,
+        address,
+        postalCode,
+        country,
+        registerDate,
+        legalPersonality,
+        colectiveAgreement,
+        mutualInsurance,
+      })
       .then((company) => {
         console.log(company);
         this.props.history.push("/admin/company");
       })
       .catch(() => {
-        this.setState({ error: "Solo se puede crear una compañia" }); //setetas el mensaje de error
+        this.setState({ error: "Los datos introducidos son incorrectos" }); //setetas el mensaje de error
       });
   };
 
   handleChange = (event) => {
     const { name, value } = event.target;
-    if (name === "registerName") {
-      // resetea el estado del botton despues del error, volviendolo a habilitar cuando se modifica el registerName
-      this.setState({ error: "" });
-    }
     this.setState({ [name]: value });
   };
 
   render() {
+    console.log(this.state);
     const {
       registerName,
       tradeName,
@@ -214,7 +208,7 @@ class CompanyCreate extends Component {
               </div>
 
               <div className="buttonDiv">
-                <p>{this.state.error}</p> {/* muestras el mensaje de error  */}
+                <p>{this.state.error}</p> {/* muestras el mensaje de error */}
                 <button
                   type="submit"
                   disabled={
@@ -234,4 +228,4 @@ class CompanyCreate extends Component {
   }
 }
 
-export default CompanyCreate;
+export default CompanyEdit;

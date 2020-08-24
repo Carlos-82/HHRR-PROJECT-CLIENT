@@ -1,6 +1,6 @@
 import axios from "axios";
 
-//cramos los servicios para importar los metods del server
+//Se crean los servicios para importar los metods del server
 class Company {
   constructor() {
     this.company = axios.create({
@@ -14,12 +14,10 @@ class Company {
   }
 
   createCompany(newCompany) {
-    return this.company
-      .post("/company/create", newCompany)
-      .then(({ data }) => data);
+    return this.company.post("/company/create", newCompany);
   }
 
-  editCompnay(id, companyEdit) {
+  editCompany(id, companyEdit) {
     return this.company
       .patch(`/company/${id}`, companyEdit)
       .then(({ data }) => data);

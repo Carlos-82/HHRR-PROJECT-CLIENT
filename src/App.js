@@ -7,7 +7,9 @@ import Navbar from "./components/Navbar";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import CompanyCreate from "./pages/CompanyCreate";
-import Private from "./pages/Private";
+import EditCompany from "./pages/EditCompany";
+import Company from "./pages/Company";
+import Admin from "./pages/Admin";
 import AnonRoute from "./components/AnonRoute";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -19,14 +21,19 @@ class App extends Component {
           <Navbar />
 
           <Switch>
-            <AnonRoute exact path="/signup" component={Signup} />
-            <AnonRoute exact path="/login" component={Login} />
-            <PrivateRoute exact path="/private" component={Private} />
             <PrivateRoute
-              exact
-              path="/private/company/create"
               component={CompanyCreate}
+              path="/admin/company/create"
             />
+            <PrivateRoute
+              component={EditCompany}
+              exact
+              path="/admin/company/:id"
+            />
+            <PrivateRoute component={Company} path="/admin/company" />
+            <PrivateRoute extact path="/admin" component={Admin} />
+            <AnonRoute path="/signup" component={Signup} />
+            <AnonRoute path="/login" component={Login} />
           </Switch>
         </div>
       </AuthProvider>
