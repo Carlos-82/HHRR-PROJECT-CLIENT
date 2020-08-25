@@ -4,7 +4,7 @@ import axios from "axios";
 class Employee {
   constructor() {
     this.company = axios.create({
-      baseURL: "http://localhost:4000/user",
+      baseURL: process.env.REACT_APP_API_URI + "/user",
       withCredentials: true,
     });
   }

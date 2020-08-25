@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { withAuth } from "../lib/AuthProvider";
 
 class Signup extends Component {
-  state = { name: "", email: "", password: "" };
+  state = { firstName: "", email: "", password: "" };
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const { name, email, password } = this.state;
-    this.props.signup({ name, email, password });
+    const { firstName, email, password } = this.state;
+    this.props.signup({ firstName, email, password });
   };
 
   handleChange = (event) => {
@@ -17,7 +17,7 @@ class Signup extends Component {
   };
 
   render() {
-    const { name, email, password } = this.state;
+    const { firstName, email, password } = this.state;
     return (
       <div>
         <h1>Sign Up</h1>
@@ -26,8 +26,8 @@ class Signup extends Component {
           <label>Name:</label>
           <input
             type="text"
-            name="name"
-            value={name}
+            name="firstName"
+            value={firstName}
             onChange={this.handleChange}
           />
 

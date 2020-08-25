@@ -11,7 +11,7 @@ class CompanyCreate extends Component {
     postalCode: "",
     country: "",
     registerDate: "",
-    legalPersonality: "",
+    legalPersonality: "fisica",
     colectiveAgreement: "",
     mutualInsurance: "",
   };
@@ -33,7 +33,7 @@ class CompanyCreate extends Component {
       mutualInsurance,
       error,
     } = this.state;
-
+    console.log("esto es otro punto", this.state);
     const newCompany = {
       registerName,
       tradeName,
@@ -47,7 +47,7 @@ class CompanyCreate extends Component {
       colectiveAgreement,
       mutualInsurance,
     };
-
+    console.log("entra aqui", newCompany);
     adminCompany
       .createCompany(newCompany)
       .then((company) => {
@@ -61,7 +61,7 @@ class CompanyCreate extends Component {
 
   handleChange = (event) => {
     const { name, value } = event.target;
-    if (name === "registerName") {
+    if (name === "name") {
       // resetea el estado del botton despues del error, volviendolo a habilitar cuando se modifica el registerName
       this.setState({ error: "" });
     }
@@ -174,8 +174,8 @@ class CompanyCreate extends Component {
                     value={legalPersonality}
                     onChange={this.handleChange}
                   >
-                    <option value="Fisica">Fisica</option>
-                    <option value="Juridica">Juridica</option>
+                    <option value="fisica">Fisica</option>
+                    <option value="juridica">Juridica</option>
                   </select>
                 </div>
               </div>

@@ -81,7 +81,7 @@ class CompanyEdit extends Component {
       <div className="container">
         <section className="section">
           <div className="page-body">
-            <h3 className="">Create Your Company</h3>
+            <h3 className="">Edit Your Company</h3>
             <form onSubmit={this.handleFormSubmit}>
               <div className="field">
                 <label className="label">Register Name:</label>
@@ -217,7 +217,7 @@ class CompanyEdit extends Component {
                   }
                   className="button"
                 >
-                  Submit Company
+                  Edit Company
                 </button>
               </div>
             </form>

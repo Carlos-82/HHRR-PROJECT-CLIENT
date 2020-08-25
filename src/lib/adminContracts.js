@@ -2,8 +2,8 @@ import axios from "axios";
 
 class Contracts {
   constructor() {
-    this.company = axios.create({
-      baseURL: "http://localhost:4000/admin",
+    this.contract = axios.create({
+      baseURL: process.env.REACT_APP_API_URI + "/admin",
       withCredentials: true,
     });
   }
@@ -14,13 +14,7 @@ class Contracts {
       .then(({ data }) => data);
   }
 
-  allContracts(id) {
-    return this.contract
-      .get(`/employee/${id}/contract`)
-      .then(({ data }) => data.contract);
-  }
-
-  oneContract(employeeId, contractId) {
+  oneContract({ employeeId, contractId }) {
     return this.contract
       .get(`/employee/${employeeId}/contract/${contractId}`)
       .then(({ data }) => data);
@@ -32,7 +26,7 @@ class Contracts {
       .then(({ data }) => data);
   }
 
-  deleteContract(employeeId, contractId) {
+  deleteContract({ employeeId, contractId }) {
     return this.contract
       .delete(`/employee/${employeeId}/contract/${contractId}`)
       .then(({ data }) => data);

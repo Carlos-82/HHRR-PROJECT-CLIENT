@@ -2,20 +2,24 @@ import axios from "axios";
 
 class Employees {
   constructor() {
-    this.company = axios.create({
+    this.user = axios.create({
       baseURL: "http://localhost:4000/admin",
       withCredentials: true,
     });
   }
 
-  employeeCreate(newEmployee) {
+  allContracts(id) {
     return this.user
-      .post("/employee/create", newEmployee)
-      .then(({ data }) => data);
+      .get(`/employee/${id}/contract`)
+      .then(({ data }) => data.contract);
+  }
+
+  employeeCreate(newEmployee) {
+    return this.user.post("/employee/create", newEmployee);
   }
 
   employeeId(employeeId) {
-    return this.user.get(`/emplyee/${employeeId}`).then(({ data }) => data);
+    return this.user.get(`/employee/${employeeId}`).then(({ data }) => data);
   }
 
   employeesAll() {

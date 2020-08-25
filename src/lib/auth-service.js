@@ -3,14 +3,14 @@ import axios from "axios";
 class Auth {
   constructor() {
     this.auth = axios.create({
-      baseURL: "http://localhost:4000",
+      baseURL: process.env.REACT_APP_API_URI,
       withCredentials: true,
     });
   }
 
-  signup({ name, email, password }) {
+  signup({ firstName, email, password }) {
     return this.auth
-      .post("/auth/signup", { name, email, password })
+      .post("/auth/signup", { firstName, email, password })
       .then(({ data }) => data);
   }
 

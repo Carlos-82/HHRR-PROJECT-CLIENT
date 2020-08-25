@@ -25,7 +25,7 @@ class Company extends Component {
 
   render() {
     const companyInfo = this.state.company;
-    return (
+    return companyInfo ? (
       <div>
         <h2>{companyInfo.registerName}</h2>
         <h3>{companyInfo.tradeName}</h3>
@@ -42,6 +42,10 @@ class Company extends Component {
         <Link to={`/admin/company/${companyInfo._id}`}>
           <button>Edit Company</button>
         </Link>
+      </div>
+    ) : (
+      <div>
+        <div>Loading</div>
       </div>
     );
   }

@@ -1,22 +1,21 @@
 import React, { Component } from "react";
 import adminEmployees from "../lib/adminEmployees";
 
-class CreateEmployee extends Component {
-  state = {
-    firstName: "",
-    lastName: "",
-    DNI: "",
-    NAF: "",
-    nationality: "",
-    genre: "Male",
-    address: "",
-    postalCode: "",
-    country: "",
-    birthDate: "",
-    admin: "false",
-    email: "",
-    password: "",
-  };
+class CompanyEdit extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount() {
+    console.log(this.props.history);
+    //como puedo traer los datos del usuario
+    const id = this.props.match.params.id;
+    adminEmployees.employeeId(id).then((employee) => {
+      console.log(employee);
+      this.setState(employee);
+    });
+  }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
@@ -28,55 +27,44 @@ class CreateEmployee extends Component {
       NAF,
       nationality,
       genre,
-      address,
+      adress,
       postalCode,
       country,
       birthDate,
       admin,
-      email,
-      password,
     } = this.state;
-
-    const newEmployee = {
-      firstName,
-      lastName,
-      DNI,
-      NAF,
-      nationality,
-      genre,
-      address,
-      postalCode,
-      country,
-      birthDate,
-      admin,
-      email,
-      password,
-    };
-
-    console.log("helooooo", newEmployee);
+    console.log("buenas", this.state);
+    const id = this.props.match.params.id;
     adminEmployees
-      .employeeCreate(newEmployee)
+      .employeeEdit(id, {
+        firstName,
+        lastName,
+        DNI,
+        NAF,
+        nationality,
+        genre,
+        adress,
+        postalCode,
+        country,
+        birthDate,
+        admin,
+      })
       .then((employee) => {
-        console.log(employee);
-        this.props.history.push("/company");
+        console.log("buenas2", employee);
+        this.props.history.push(`/employee/${id}`);
       })
       .catch(() => {
-        this.setState({
-          error: "There was an error during the employee creation",
-        }); //seteas el mensaje de error
+        this.setState({ error: "Los datos introducidos son incorrectos" }); //setetas el mensaje de error
       });
   };
 
   handleChange = (event) => {
     const { name, value } = event.target;
-    if (name === "firstName") {
-      // resetea el estado del botton despues del error, volviendolo a habilitar cuando se modifica el registerName
-      this.setState({ error: "" });
-    }
     this.setState({ [name]: value });
   };
 
   render() {
+    console.log(this.state);
     const {
       firstName,
       lastName,
@@ -89,15 +77,13 @@ class CreateEmployee extends Component {
       country,
       birthDate,
       admin,
-      email,
-      password,
     } = this.state;
 
     return (
       <div className="container">
         <section className="section">
           <div className="page-body">
-            <h3 className="">Employee Form</h3>
+            <h3 className="Edit">Edit Employee</h3>
             <form onSubmit={this.handleFormSubmit}>
               <div className="field">
                 <label className="label">First Name:</label>
@@ -105,7 +91,7 @@ class CreateEmployee extends Component {
                   className="input"
                   type="text"
                   name="firstName"
-                  value={firstName}
+                  value={firstName || ""}
                   onChange={this.handleChange}
                 />
               </div>
@@ -116,7 +102,7 @@ class CreateEmployee extends Component {
                   className="input"
                   type="text"
                   name="lastName"
-                  value={lastName}
+                  value={lastName || ""}
                   onChange={this.handleChange}
                 />
               </div>
@@ -127,7 +113,7 @@ class CreateEmployee extends Component {
                   className="input"
                   type="text"
                   name="DNI"
-                  value={DNI}
+                  value={DNI || ""}
                   onChange={this.handleChange}
                 />
               </div>
@@ -138,7 +124,7 @@ class CreateEmployee extends Component {
                   className="input"
                   type="number"
                   name="NAF"
-                  value={NAF}
+                  value={NAF || ""}
                   onChange={this.handleChange}
                 />
               </div>
@@ -149,7 +135,7 @@ class CreateEmployee extends Component {
                   className="input"
                   type="text"
                   name="nationality"
-                  value={nationality}
+                  value={nationality || ""}
                   onChange={this.handleChange}
                 />
               </div>
@@ -174,7 +160,7 @@ class CreateEmployee extends Component {
                   className="input"
                   type="text"
                   name="address"
-                  value={address}
+                  value={address || ""}
                   onChange={this.handleChange}
                 />
               </div>
@@ -185,7 +171,7 @@ class CreateEmployee extends Component {
                   className="input"
                   type="number"
                   name="postalCode"
-                  value={postalCode}
+                  value={postalCode || ""}
                   onChange={this.handleChange}
                 />
               </div>
@@ -196,7 +182,7 @@ class CreateEmployee extends Component {
                   className="input"
                   type="text"
                   name="country"
-                  value={country}
+                  value={country || ""}
                   onChange={this.handleChange}
                 />
               </div>
@@ -207,7 +193,7 @@ class CreateEmployee extends Component {
                   className="input"
                   type="date"
                   name="birthDate"
-                  value={birthDate}
+                  value={birthDate || ""}
                   onChange={this.handleChange}
                 />
               </div>
@@ -223,28 +209,6 @@ class CreateEmployee extends Component {
                 />
               </div>
 
-              <div className="field">
-                <label className="label">Email:</label>
-                <input
-                  className="input"
-                  type="email"
-                  name="email"
-                  value={email}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">Password:</label>
-                <input
-                  className="input"
-                  type="password"
-                  name="password"
-                  value={password}
-                  onChange={this.handleChange}
-                />
-              </div>
-
               <div className="buttonDiv">
                 <p>{this.state.error}</p> {/* muestras el mensaje de error  */}
                 <button
@@ -255,7 +219,7 @@ class CreateEmployee extends Component {
                   }
                   className="button"
                 >
-                  Submit Employee
+                  Submit Edit
                 </button>
               </div>
             </form>
@@ -266,4 +230,4 @@ class CreateEmployee extends Component {
   }
 }
 
-export default CreateEmployee;
+export default CompanyEdit;

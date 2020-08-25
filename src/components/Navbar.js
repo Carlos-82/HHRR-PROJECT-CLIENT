@@ -12,13 +12,13 @@ class Navbar extends Component {
         </Link>
         {isLoggedin && user.admin && (
           <>
-            <p className="navbar-user">name: {user.name}</p>
+            <p className="navbar-user">name: {user.firstName}</p>
             {user.companyId ? ( //ternaria que modifica la navbar en funcion de si la empresa esta creada o no
               <Link to="/admin/company">Company</Link>
             ) : (
               <Link to="/admin/company/create">Create Company</Link>
             )}
-            <Link to="/admin/employe/create">Create Employee</Link>
+            <Link to="/admin/employee/create">Create Employee</Link>
             <Link to={`/admin/${user.id}`}>Profile</Link>
             <button className="navbar-button" onClick={logout}>
               Logout
