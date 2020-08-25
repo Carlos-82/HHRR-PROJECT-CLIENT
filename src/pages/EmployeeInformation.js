@@ -54,6 +54,9 @@ class EmployeeInformation extends Component {
         <Link to={`/admin/employee/${employee._id}/editemployee`}>
           <button>Edit Employee</button>
         </Link>
+        <Link to={`/admin/employee/${employee._id}/contract`}>
+          <button>Contracts</button>
+        </Link>
 
         {this.props.user && employee.id !== this.props.user.id && (
           <button

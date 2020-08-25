@@ -58,7 +58,7 @@ class CreateEmployee extends Component {
       .employeeCreate(newEmployee)
       .then((employee) => {
         console.log(employee);
-        this.props.history.push("/company");
+        this.props.history.push("/admin");
       })
       .catch(() => {
         this.setState({
