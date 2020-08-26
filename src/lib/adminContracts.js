@@ -22,7 +22,10 @@ class Contracts {
 
   editContract(employeeId, contractId, updatedContract) {
     return this.contract
-      .get(`/employee/${employeeId}/contract/${contractId}`, updatedContract)
+      .get(
+        `/employee/${employeeId}/contract/${contractId}/editContract`,
+        updatedContract
+      )
       .then(({ data }) => data);
   }
 

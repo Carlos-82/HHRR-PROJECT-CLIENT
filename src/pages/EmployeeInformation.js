@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { withAuth } from "../lib/AuthProvider";
 
 import adminEmployees from "../lib/adminEmployees";
 
@@ -44,7 +45,7 @@ class EmployeeInformation extends Component {
         <p>NAF: {employee.NAF}</p>
         <p>Nationality: {employee.nationality}</p>
         <p>Genre: {employee.genre}</p>
-        <p>Address: {employee.Address}</p>
+        <p>Address: {employee.address}</p>
         <p>Postal Code: {employee.postalCode}</p>
         <p>Country: {employee.country}</p>
         <p>Birth Date: {employee.birthDate}</p>
@@ -73,4 +74,4 @@ class EmployeeInformation extends Component {
   }
 }
 
-export default EmployeeInformation;
+export default withAuth(EmployeeInformation);

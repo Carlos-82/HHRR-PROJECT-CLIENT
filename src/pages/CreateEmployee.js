@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import adminEmployees from "../lib/adminEmployees";
+import { withAuth } from "../lib/AuthProvider";
 
 class CreateEmployee extends Component {
   state = {
@@ -162,8 +163,8 @@ class CreateEmployee extends Component {
                     value={genre}
                     onChange={this.handleChange}
                   >
-                    <option value="Fisica">Male</option>
-                    <option value="Juridica">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                   </select>
                 </div>
               </div>
@@ -266,4 +267,4 @@ class CreateEmployee extends Component {
   }
 }
 
-export default CreateEmployee;
+export default withAuth(CreateEmployee);

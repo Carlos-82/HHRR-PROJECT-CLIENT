@@ -3,10 +3,15 @@ import axios from "axios";
 //Se crean los servicios para importar los metods del server
 class Employee {
   constructor() {
-    this.company = axios.create({
+    this.user = axios.create({
       baseURL: process.env.REACT_APP_API_URI + "/user",
       withCredentials: true,
     });
+  }
+
+  employeeContract(userId) {
+    console.log(userId);
+    return this.user.get(`/${userId}/contracto`).then(({ data }) => data);
   }
 
   employeeProfile(userId) {
@@ -14,7 +19,9 @@ class Employee {
   }
 
   editProfile(userId, editedProfile) {
-    return this.user.get(`/${userId}`, editedProfile).then(({ data }) => data);
+    return this.user
+      .get(`/${userId}/editProfile`, editedProfile)
+      .then(({ data }) => data);
   }
 }
 

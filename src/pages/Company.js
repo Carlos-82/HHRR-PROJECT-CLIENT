@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { withAuth } from "../lib/AuthProvider";
 
 import adminCompany from "../lib/adminCompany";
 
@@ -27,21 +28,43 @@ class Company extends Component {
     const companyInfo = this.state.company;
     return companyInfo ? (
       <div>
-        <h2>{companyInfo.registerName}</h2>
-        <h3>{companyInfo.tradeName}</h3>
-        <p>CIF: {companyInfo.CIF}</p>
-        <p>CCC: {companyInfo.CCC}</p>
-        <p>Adress: {companyInfo.adress}</p>
-        <p>Postal Code: {companyInfo.postalCode}</p>
-        <p>Country: {companyInfo.country}</p>
-        <p>Register Date:{companyInfo.registerDate}</p>
-        <p>Legal Personality:{companyInfo.legalPersonality}</p>
-        <p>Colective Agreement: {companyInfo.colectiveAgreement}</p>
-        <p>Mutual Insurance: {companyInfo.mutualInsurance}</p>
-
-        <Link to={`/admin/company/${companyInfo._id}`}>
-          <button>Edit Company</button>
-        </Link>
+        <div className="card">
+          <div className="card-header">
+            <h2>{companyInfo.tradeName}</h2>
+            <h3>{companyInfo.registerName}</h3>
+          </div>
+          <div className="list-group list-group-flush">
+            <p className="list-group-item">CIF: {companyInfo.CIF}</p>
+            <p className="list-group-item">CCC: {companyInfo.CCC}</p>
+            <p className="list-group-item">
+              Adress: {companyInfo.companyAddress}
+            </p>
+            <p className="list-group-item">
+              Postal Code: {companyInfo.postalCode}
+            </p>
+            <p className="list-group-item">Country: {companyInfo.country}</p>
+            <p className="list-group-item">
+              Register Date:{companyInfo.registerDate}
+            </p>
+            <p className="list-group-item">
+              Legal Personality:{companyInfo.legalPersonality}
+            </p>
+            <p className="list-group-item">
+              Colective Agreement: {companyInfo.colectiveAgreement}
+            </p>
+            <p className="list-group-item">
+              Mutual Insurance: {companyInfo.mutualInsurance}
+            </p>
+          </div>
+        </div>
+        <div className="buttoncontainer buttoncompany">
+          <Link to={`/admin/company/${companyInfo._id}`}>
+            <button className="buttonedit btn btn-lg ">Edit Company</button>
+          </Link>
+          <Link to={`/admin`}>
+            <button className=" buttonprofile btn btn-lg">Home</button>
+          </Link>
+        </div>
       </div>
     ) : (
       <div>
@@ -51,4 +74,4 @@ class Company extends Component {
   }
 }
 
-export default Company;
+export default withAuth(Company);

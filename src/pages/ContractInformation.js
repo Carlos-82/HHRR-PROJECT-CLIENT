@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { withAuth } from "../lib/AuthProvider";
 
 import adminContracts from "../lib/adminContracts";
 
@@ -49,31 +50,35 @@ class ContractInformation extends Component {
         {this.state.contract.user && (
           <div>
             <h2>{this.state.contract.user.firstName}</h2>
-            {/* 
-            <p>Start Date: {contract.startDate}</p>
-            <p>End Date: {contract.endDate}</p>
-            <p>Contract Type: {contract.contractType}</p>
-            <p>Contract Code: {contract.contractCode}</p>
-            <p>WorK per Day: {contract.worDay}</p>
-            <p>WorK Hours: {contract.workHours}</p>
-            <p>Category: {contract.category}</p>
-            <p>Job Role: {contract.jobRole}</p>
-            <p>Salay: {contract.salary}</p>
-            <p>Bonus: {contract.bonus}</p>
-            <p>Education Level: {contract.educationLevel}</p>
-            <p>Vacation Days: {contract.vacationDays}</p>
-            <p>Aditional Clauses: {contract.aditionalClauses}</p>
+            <h3>
+              {this.state.contract.contractType}{" "}
+              {this.state.contract.contractCode}
+            </h3>
+            <p>Start Date: {this.state.contract.startDate}</p>
+            <p>End Date: {this.state.contract.endDate}</p>
+            <p>WorK per Day: {this.state.contract.worDay}</p>
+            <p>WorK Hours: {this.state.contract.workHours}</p>
+            <p>Category: {this.state.contract.category}</p>
+            <p>Job Role: {this.state.contract.jobRole}</p>
+            <p>Salay: {this.state.contract.salary}</p>
+            <p>Bonus: {this.state.contract.bonus}</p>
+            <p>Education Level: {this.state.contract.educationLevel}</p>
+            <p>Vacation Days: {this.state.contract.vacationDays}</p>
+            <p>Aditional Clauses: {this.state.contract.aditionalClauses}</p>
 
-            <Link to={`/employee/${contract.user.id}/contract/${contract.id}`}>
+            <Link
+              to={`/employee/${this.state.contract.user.id}/contract/${this.state.contract.id}`}
+            >
               <button>Edit Contract</button>
             </Link>
 
-            {this.props.user && contract.user.id !== this.props.user.id && (
-              <button
-                className="button"
-                onClick={() => this.delete(contract._id)}
-              ></button> 
-            )} */}
+            {this.props.user &&
+              this.state.contract.user.id !== this.props.user.id && (
+                <button
+                  className="button"
+                  onClick={() => this.delete(this.state.contract._id)}
+                ></button>
+              )}
           </div>
         )}
       </div>
@@ -81,4 +86,4 @@ class ContractInformation extends Component {
   }
 }
 
-export default ContractInformation;
+export default withAuth(ContractInformation);

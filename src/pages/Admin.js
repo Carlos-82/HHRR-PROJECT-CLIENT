@@ -25,10 +25,14 @@ class Admin extends Component {
     });
   }
 
-  delete = (id) => {
+  delete = (id, index) => {
     adminEmployees
       .employeeDelete(id)
-      .then(() => this.props.history.push("/admin"))
+      .then(() => {
+        const newView = [...this.state.allEmployees]; //copia del array
+        newView.splice(index, 1);
+        this.setState({ allEmployees: newView });
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -43,22 +47,28 @@ class Admin extends Component {
         </>
         <div>
           {allEmployees &&
-            allEmployees.map((employee) => {
+            allEmployees.map((employee, index) => {
               return (
-                <div key={employee._id}>
-                  <p>{`${employee.firstName} ${employee.lastName || ""}`}</p>
-                  <p>{employee.DNI}</p>
-                  <Link to={`/admin/employee/${employee._id}`}>
-                    <button>Profile</button>
-                  </Link>
-                  {employee._id !== this.props.user._id && (
-                    <button
-                      className="button"
-                      onClick={() => this.delete(employee._id)}
-                    >
-                      Delete
-                    </button>
-                  )}
+                <div key={employee._id} className="card">
+                  <h5 className="card-header">{`${employee.firstName} ${
+                    employee.lastName || ""
+                  }`}</h5>
+                  <div className=" buttoncontainer card-body">
+                    <p>DNI: {employee.DNI}</p>
+                    <div className="divbuttons">
+                      <Link to={`/admin/employee/${employee._id}`}>
+                        <button className="buttonprofile btn">Profile</button>
+                      </Link>
+                      {employee._id !== this.props.user._id && (
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => this.delete(employee._id, index)}
+                        >
+                          Delete
+                        </button>
+                      )}
+                    </div>
+                  </div>
                 </div>
               );
             })}

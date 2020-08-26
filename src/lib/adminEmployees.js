@@ -8,14 +8,12 @@ class Employees {
     });
   }
 
-  allContracts(id) {
-    return this.user
-      .get(`/employee/${id}/contract`)
-      .then(({ data }) => data.contract);
-  }
-
   employeeCreate(newEmployee) {
     return this.user.post("/employee/create", newEmployee);
+  }
+
+  allContracts(id) {
+    return this.user.get(`/employee/${id}/contract`).then(({ data }) => data);
   }
 
   employeeId(employeeId) {
@@ -33,7 +31,9 @@ class Employees {
   }
 
   employeeDelete(id) {
-    return this.user.delete(`/employee/${id}`).then(({ data }) => data);
+    return this.user
+      .delete(`/employee/${id}`)
+      .then(({ data }) => console.log(data));
   }
 }
 

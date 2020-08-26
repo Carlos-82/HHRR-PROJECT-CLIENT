@@ -19,35 +19,56 @@ class Signup extends Component {
   render() {
     const { firstName, email, password } = this.state;
     return (
-      <div>
+      <div className="containerform">
         <h1>Sign Up</h1>
 
         <form onSubmit={this.handleFormSubmit}>
-          <label>Name:</label>
-          <input
-            type="text"
-            name="firstName"
-            value={firstName}
-            onChange={this.handleChange}
-          />
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Name:</label>
+            <div className="col-sm-10">
+              <input
+                placeholder="Your First Name is required"
+                className="form-control"
+                type="text"
+                name="firstName"
+                value={firstName}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+          <br />
 
-          <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={this.handleChange}
-          />
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Email:</label>
+            <div className="col-sm-10">
+              <input
+                placeholder="Email is required"
+                className="form-control"
+                type="email"
+                name="email"
+                value={email}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+          <br />
 
-          <label>Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={this.handleChange}
-          />
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Password:</label>
+            <div className="col-sm-10">
+              <input
+                placeholder="Password is required"
+                className="form-control"
+                type="password"
+                name="password"
+                value={password}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+          <br />
 
-          <input type="submit" value="Signup" />
+          <input type="submit" value="Signup" className="btn btn-dark" />
         </form>
 
         <p>Already have account?</p>

@@ -1,52 +1,70 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
+import { withAuth } from "../lib/AuthProvider";
 import adminContracts from "../lib/adminContracts";
+import adminEmployees from "../lib/adminEmployees";
 
 class AllContracts extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      allContracts: [],
+      employee: {},
     };
   }
 
   componentDidMount() {
-    const id = this.props.match.params;
-    adminContracts.allContracts(id).then((user) => {
-      console.log("Roooon", user);
-      this.setState({ allContracts: user.contract });
+    const { employeeId } = this.props.match.params;
+    adminEmployees.allContracts(employeeId).then((employee) => {
+      this.setState({ employee });
     });
   }
 
+  delete = (employeeId, contractId) => {
+    adminContracts
+      .deleteContract(employeeId, contractId)
+      .then(() =>
+        this.props.history.push(
+          `/admin/employee/${employeeId}/contract/${contractId}`
+        )
+      )
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   render() {
-    const { allContracts } = this.state;
-    console.log("miau", this.state);
-    console.log("guau", allContracts);
+    const { employee } = this.state;
     return (
       <div>
-        {allContracts &&
-          allContracts.map((contract) => {
-            return (
-              <div key={contract._id}>
+        {employee &&
+          employee.contract &&
+          employee.contract.map((contract) => (
+            <div key={contract._id}>
+              <Link
+                to={`/admin/employee/${employee._id}/contract/${contract._id}`}
+              >
                 <p>{`${contract.contractType} ${contract.startDate || ""}`}</p>
                 <p>{contract.endDate}</p>
-                {/*  <Link to={`/admin/employee/${employee._id}`}>
-                    <button>Profile</button>
-                  </Link>
-                  {employee._id !== this.props.user._id && (
-                    <button
-                      className="button"
-                      onClick={() => this.delete(employee._id)}
-                    >
-                      Delete
-                    </button>
-                  )} */}
-              </div>
-            );
-          })}
+              </Link>
+              <Link to={`/admin/employee/${employee._id}`}>
+                <button>Profile</button>
+              </Link>
+              {this.props.user && employee._id !== this.props.user._id && (
+                <button
+                  className="button"
+                  onClick={() => this.delete(employee._id)}
+                >
+                  Delete
+                </button>
+              )}
+            </div>
+          ))}
+        <Link to={`/admin/employee/${employee._id}/contract/create`}>
+          <button>Create Contract</button>
+        </Link>
       </div>
     );
   }
 }
 
-export default AllContracts;
+export default withAuth(AllContracts);

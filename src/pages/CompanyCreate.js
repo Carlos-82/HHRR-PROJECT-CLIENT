@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import adminCompany from "../lib/adminCompany";
+import { withAuth } from "../lib/AuthProvider";
 
 class CompanyCreate extends Component {
   state = {
@@ -7,13 +8,14 @@ class CompanyCreate extends Component {
     tradeName: "",
     CIF: "",
     CCC: "",
-    address: "",
+    companyAddress: "",
     postalCode: "",
     country: "",
     registerDate: "",
     legalPersonality: "fisica",
     colectiveAgreement: "",
     mutualInsurance: "",
+    error: null,
   };
 
   handleFormSubmit = (event) => {
@@ -24,14 +26,13 @@ class CompanyCreate extends Component {
       tradeName,
       CIF,
       CCC,
-      address,
+      companyAddress,
       postalCode,
       country,
       registerDate,
       legalPersonality,
       colectiveAgreement,
       mutualInsurance,
-      error,
     } = this.state;
     console.log("esto es otro punto", this.state);
     const newCompany = {
@@ -39,7 +40,7 @@ class CompanyCreate extends Component {
       tradeName,
       CIF,
       CCC,
-      address,
+      companyAddress,
       postalCode,
       country,
       registerDate,
@@ -74,7 +75,7 @@ class CompanyCreate extends Component {
       tradeName,
       CIF,
       CCC,
-      address,
+      companyAddress,
       postalCode,
       country,
       registerDate,
@@ -138,8 +139,8 @@ class CompanyCreate extends Component {
                 <input
                   className="input"
                   type="text"
-                  name="address"
-                  value={address}
+                  name="companyAddress"
+                  value={companyAddress}
                   onChange={this.handleChange}
                 />
               </div>
@@ -234,4 +235,4 @@ class CompanyCreate extends Component {
   }
 }
 
-export default CompanyCreate;
+export default withAuth(CompanyCreate);

@@ -3,14 +3,29 @@
   padding: 0;
 }
 
+html {
+  margin: 0;
+  padding: 0;
+}
+
 .App {
   padding: 20px;
+}
+
+.container {
+  padding: 0;
+}
+
+.navbar {
+  width: 100%;
 }
 
 nav.navbar {
   display: flex;
   padding: 20px;
-  background: #686de0;
+  background: #6c8fda;
+
+  justify-content: space-between;
 }
 
 nav.navbar .navbar-user {
@@ -28,4 +43,47 @@ button.navbar-button {
 #home-btn {
   color: white;
   text-decoration: none;
+}
+
+.containerbuttons {
+  display: flex;
+}
+
+.containerform {
+  text-align: center;
+  margin-top: 10%;
+}
+
+form {
+  margin: 10%;
+}
+.buttoncontainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.divbuttons {
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.buttonprofile {
+  background-color: #6c8fda;
+  font-size: 16px;
+}
+
+.card {
+  margin-top: 5%;
+}
+
+.card-header {
+  background-color: #95aad6;
+}
+.buttoncompany {
+  margin: 10px 0;
+}
+
+.buttonedit {
+  background-color: rgb(97, 202, 202);
+  font-size: 16px;
 }

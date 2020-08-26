@@ -2,24 +2,19 @@ import React, { Component } from "react";
 import adminContracts from "../lib/adminContracts";
 import { withAuth } from "../lib/AuthProvider";
 
-class ContractCreate extends Component {
+class ContractEdit extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      startDate: "",
-      endDate: "",
-      contractType: "",
-      contractCode: "",
-      workDay: "",
-      workHours: "",
-      category: "",
-      jobRole: "",
-      salary: "",
-      bonus: "",
-      educationLevel: "",
-      vacationDays: "",
-      aditionalClauses: "",
-    };
+    this.state = {};
+  }
+
+  componentDidMount() {
+    const { employeeId, contractId } = this.props.match.params;
+
+    adminContracts.OneContract(employeeId, contractId).then((contract) => {
+      console.log(contract);
+      this.setState(contract);
+    });
   }
 
   handleFormSubmit = (event) => {
@@ -41,38 +36,35 @@ class ContractCreate extends Component {
       aditionalClauses,
     } = this.state;
 
-    const newContract = {
-      startDate,
-      endDate,
-      contractType,
-      contractCode,
-      workDay,
-      workHours,
-      category,
-      jobRole,
-      salary,
-      bonus,
-      educationLevel,
-      vacationDays,
-      aditionalClauses,
-    };
-    const { employeeId } = this.props.match.params;
+    const { employeeId, contractId } = this.props.match.params;
 
     adminContracts
-      .contractCreate(employeeId, newContract)
-      .then(this.props.history.push("/Admin"))
+      .editContract(employeeId, contractId, {
+        startDate,
+        endDate,
+        contractType,
+        contractCode,
+        workDay,
+        workHours,
+        category,
+        jobRole,
+        salary,
+        bonus,
+        educationLevel,
+        vacationDays,
+        aditionalClauses,
+      })
+      .then((contract) => {
+        console.log(contract);
+        this.props.history.push("/admin");
+      })
       .catch(() => {
-        this.setState({
-          error: "There was an error during the contract creation",
-        }); //seteas el mensaje de error
+        this.setState({ error: "Los datos introducidos son incorrectos" }); //setetas el mensaje de error
       });
   };
 
   handleChange = (event) => {
     const { name, value } = event.target;
-    if (name === "contractType") {
-      this.setState({ error: "" });
-    }
     this.setState({ [name]: value });
   };
 
@@ -264,4 +256,4 @@ class ContractCreate extends Component {
   }
 }
 
-export default withAuth(ContractCreate);
+export default withAuth(ContractEdit);

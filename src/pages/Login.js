@@ -19,27 +19,43 @@ class Login extends Component {
     const { email, password } = this.state;
 
     return (
-      <div>
+      <div className="containerform">
         <h1>Login</h1>
 
         <form onSubmit={this.handleFormSubmit}>
-          <label>Email:</label>
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Email:</label>
+            <div className="col-sm-10">
+              <input
+                placeholder="Your email is required"
+                className="form-control"
+                type="email"
+                name="email"
+                value={email}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+          <br />
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Password:</label>
+            <div className="col-sm-10">
+              <input
+                placeholder="Your password is required"
+                className="form-control"
+                type="password"
+                name="password"
+                value={password}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+          <br />
           <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={this.handleChange}
+            type="submit"
+            value="Login"
+            className="btn btn-outline-primary"
           />
-
-          <label>Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={this.handleChange}
-          />
-
-          <input type="submit" value="Login" />
         </form>
       </div>
     );

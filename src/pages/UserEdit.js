@@ -1,18 +1,21 @@
 import React, { Component } from "react";
-import adminEmployees from "../lib/adminEmployees";
-import { withAuth } from "../lib/AuthProvider";
 
-class EditEmployee extends Component {
+import { withAuth } from "../lib/AuthProvider";
+import employeeService from "../lib/employeeService";
+
+class UserEdit extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
   componentDidMount() {
+    console.log(this.props.history);
     //como puedo traer los datos del usuario
-    const id = this.props.match.params.id;
-    adminEmployees.employeeId(id).then((employee) => {
-      this.setState(employee);
+    const id = this.props.match.params.userId;
+    employeeService.employeeProfile(id).then((user) => {
+      console.log(user);
+      this.setState(user);
     });
   }
 
@@ -26,15 +29,15 @@ class EditEmployee extends Component {
       NAF,
       nationality,
       genre,
-      address,
+      adress,
       postalCode,
       country,
       birthDate,
       admin,
     } = this.state;
-
-    const id = this.props.match.params.id;
-    adminEmployees
+    console.log("buenas", this.state);
+    const id = this.props.match.params.userId;
+    employeeService
       .employeeEdit(id, {
         firstName,
         lastName,
@@ -42,14 +45,15 @@ class EditEmployee extends Component {
         NAF,
         nationality,
         genre,
-        address,
+        adress,
         postalCode,
         country,
         birthDate,
         admin,
       })
-      .then((employee) => {
-        this.props.history.push(`/admin/employee/${id}`);
+      .then((user) => {
+        console.log("buenas2", user);
+        this.props.history.push(`/employee/${id}`);
       })
       .catch(() => {
         this.setState({ error: "Los datos introducidos son incorrectos" }); //setetas el mensaje de error
@@ -62,6 +66,7 @@ class EditEmployee extends Component {
   };
 
   render() {
+    console.log(this.state);
     const {
       firstName,
       lastName,
@@ -227,4 +232,4 @@ class EditEmployee extends Component {
   }
 }
 
-export default withAuth(EditEmployee);
+export default withAuth(UserEdit);

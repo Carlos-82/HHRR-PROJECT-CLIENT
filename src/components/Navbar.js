@@ -8,45 +8,52 @@ class Navbar extends Component {
     return (
       <nav className="navbar">
         {isLoggedin && user.admin && (
+          <div className="navigation">
+            <>
+              <Link to="/admin" id="home-btn">
+                <img src="../../public/logohr.jpg" alt="logo" />
+              </Link>
+              <p className="navbar-user">Hello {user.firstName}</p>
+              {user.companyId ? ( //ternaria que modifica la navbar en funcion de si la empresa esta creada o no
+                <Link to="/admin/company">Company</Link>
+              ) : (
+                <Link to="/admin/company/create">Create Company</Link>
+              )}
+              <Link to="/admin/employee/create">Create Employee</Link>
+              <Link to={`/admin/${user.id}`}>Profile</Link>
+
+              <button className="navbar-button" onClick={logout}>
+                Logout
+              </button>
+            </>
+          </div>
+        )}
+
+        {isLoggedin && !user.admin && (
           <>
-            <Link to="/admin" id="home-btn">
-              <h4>Home</h4>
+            <Link to="/user" id="home-btn">
+              <img src="../public/logohr.png" alt="logo" />
             </Link>
-            <p className="navbar-user">name: {user.firstName}</p>
-            {user.companyId ? ( //ternaria que modifica la navbar en funcion de si la empresa esta creada o no
-              <Link to="/admin/company">Company</Link>
-            ) : (
-              <Link to="/admin/company/create">Create Company</Link>
-            )}
-            <Link to="/admin/employee/create">Create Employee</Link>
-            <Link to={`/admin/${user.id}`}>Profile</Link>
             <button className="navbar-button" onClick={logout}>
               Logout
             </button>
           </>
         )}
 
-        {isLoggedin && !user.admin && (
-          <>
-            <Link to="/user" id="home-btn">
-              <h4>Home</h4>
-            </Link>
-            es user
-          </>
-        )}
-
         {!isLoggedin && (
           <>
             <Link to="/" id="home-btn">
-              <h4>Home</h4>
+              <img src="images/logohr.jpg" alt="logo" />
             </Link>
-            <Link to="/login">
-              <button className="navbar-button">Login</button>
-            </Link>
-            <br />
-            <Link to="/signup">
-              <button className="navbar-button">Sign Up</button>
-            </Link>
+            <div className="containerbuttons">
+              <Link to="/login">
+                <button className="navbar-button">Login</button>
+              </Link>
+              <br />
+              <Link to="/signup">
+                <button className="navbar-button">Sign Up</button>
+              </Link>
+            </div>
           </>
         )}
       </nav>
