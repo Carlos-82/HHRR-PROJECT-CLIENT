@@ -33,6 +33,9 @@ nav.navbar .navbar-user {
   color: white;
 }
 
+.logo {
+  width: 100px;
+}
 button.navbar-button {
   padding: 5px 20px;
   width: 100px;
@@ -86,4 +89,8 @@ form {
 .buttonedit {
   background-color: rgb(97, 202, 202);
   font-size: 16px;
+}
+
+.divcheck {
+  text-align: left;
 }

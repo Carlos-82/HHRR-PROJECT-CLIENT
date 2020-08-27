@@ -17,38 +17,43 @@ class UserProfile extends Component {
     employeeService
       .employeeProfile(id)
       .then((user) => {
-        console.log(user);
         this.setState({ user });
       })
       .catch(() => {
-        this.setState({ error: "Sorry but we can't acces to the Company" }); //setetas el mensaje de error
+        this.setState({ error: "Sorry but we can't acces to the Porfile" }); //setetas el mensaje de error
       });
   }
 
   render() {
-    const employee = this.state.employee; //aqui leo lo de la linea 21
+    const { user } = this.state; //aqui leo lo de la linea 21
+    console.log(user);
     return (
       <div>
-        <h2>
-          {employee.firstName} {employee.lastName}
-        </h2>
-        <p>DNI: {employee.DNI}</p>
-        <p>NAF: {employee.NAF}</p>
-        <p>Nationality: {employee.nationality}</p>
-        <p>Genre: {employee.genre}</p>
-        <p>Address: {employee.Address}</p>
-        <p>Postal Code: {employee.postalCode}</p>
-        <p>Country: {employee.country}</p>
-        <p>Birth Date: {employee.birthDate}</p>
-        <p>Is Admin? {employee.admin ? "Yes" : "No"}</p>
-        <p>Email: {employee.email}</p>
+        <div className="card">
+          <div className="card-header">
+            <h2>{`${user.firstName} ${user.lastName}`}</h2>
+          </div>
+          <div className="list-group list-group-flush">
+            <p className="list-group-item">DNI: {user.DNI}</p>
+            <p className="list-group-item">NAF: {user.NAF}</p>
+            <p className="list-group-item">Nationality: {user.nationality}</p>
+            <p className="list-group-item">Genre: {user.genre}</p>
+            <p className="list-group-item">Address: {user.Address}</p>
+            <p className="list-group-item">Postal Code: {user.postalCode}</p>
+            <p className="list-group-item">Country: {user.country}</p>
+            <p className="list-group-item">Birth Date: {user.birthDate}</p>
 
-        <Link to={`/user/${employee._id}/editProfile`}>
-          <button>Edit Profile</button>
-        </Link>
-        <Link to={`/user`}>
-          <button>Back</button>
-        </Link>
+            <p className="list-group-item">Email: {user.email}</p>
+          </div>
+          <div className="buttoncontainer buttoncompany">
+            <Link to={`/user/${user._id}/editprofile`}>
+              <button className="buttonedit btn btn-lg">Edit Profile</button>
+            </Link>
+            <Link to={`/user`}>
+              <button className=" buttonprofile btn btn-lg">Back</button>
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }

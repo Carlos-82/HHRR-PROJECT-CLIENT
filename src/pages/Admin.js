@@ -19,10 +19,13 @@ class Admin extends Component {
       this.props.history.push("/");
     }
 
-    adminEmployees.employeesAll().then((company) => {
-      console.log("goodmorning", company);
-      this.setState({ allEmployees: company.userIds });
-    });
+    adminEmployees
+      .employeesAll()
+      .then((company) => {
+        console.log("goodmorning", company);
+        this.setState({ allEmployees: company.userIds });
+      })
+      .catch((err) => console.log(err));
   }
 
   delete = (id, index) => {

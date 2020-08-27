@@ -95,173 +95,203 @@ class CreateEmployee extends Component {
     } = this.state;
 
     return (
-      <div className="container">
-        <section className="section">
-          <div className="page-body">
-            <h3 className="">Employee Form</h3>
-            <form onSubmit={this.handleFormSubmit}>
-              <div className="field">
-                <label className="label">First Name:</label>
-                <input
-                  className="input"
-                  type="text"
-                  name="firstName"
-                  value={firstName}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">Last Name:</label>
-                <input
-                  className="input"
-                  type="text"
-                  name="lastName"
-                  value={lastName}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">DNI:</label>
-                <input
-                  className="input"
-                  type="text"
-                  name="DNI"
-                  value={DNI}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">NAF:</label>
-                <input
-                  className="input"
-                  type="number"
-                  name="NAF"
-                  value={NAF}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">Nationality:</label>
-                <input
-                  className="input"
-                  type="text"
-                  name="nationality"
-                  value={nationality}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">Genre</label>
-                <div className="select">
-                  <select
-                    name="genre"
-                    value={genre}
-                    onChange={this.handleChange}
-                  >
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="field">
-                <label className="label">Address:</label>
-                <input
-                  className="input"
-                  type="text"
-                  name="address"
-                  value={address}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">Postal Code:</label>
-                <input
-                  className="input"
-                  type="number"
-                  name="postalCode"
-                  value={postalCode}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">Country</label>
-                <input
-                  className="input"
-                  type="text"
-                  name="country"
-                  value={country}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">Birth Date:</label>
-                <input
-                  className="input"
-                  type="date"
-                  name="birthDate"
-                  value={birthDate}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">App Admin:</label>
-                <input
-                  className="input"
-                  type="checkbox"
-                  name="admin"
-                  value={admin}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">Email:</label>
-                <input
-                  className="input"
-                  type="email"
-                  name="email"
-                  value={email}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">Password:</label>
-                <input
-                  className="input"
-                  type="password"
-                  name="password"
-                  value={password}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="buttonDiv">
-                <p>{this.state.error}</p> {/* muestras el mensaje de error  */}
-                <button
-                  type="submit"
-                  disabled={
-                    !!this.state.error
-                    /* se desabilita el button cuando hay un error */
-                  }
-                  className="button"
-                >
-                  Submit Employee
-                </button>
-              </div>
-            </form>
+      <div className="containerform">
+        <h3 className="">Employee Form</h3>
+        <form onSubmit={this.handleFormSubmit}>
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">FirsT Name:</label>
+            <div className="col-sm-10">
+              <input
+                placeholder="First Name"
+                className="form-control"
+                type="text"
+                name="firstName"
+                value={firstName}
+                onChange={this.handleChange}
+              />
+            </div>
           </div>
-        </section>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Last Name:</label>
+            <div className="col-sm-10">
+              <input
+                placeholder="Last Name"
+                className="form-control"
+                type="text"
+                name="lastName"
+                value={lastName}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Email:</label>
+            <div className="col-sm-10">
+              <input
+                placeholder="email"
+                className="form-control"
+                type="text"
+                name="email"
+                value={email}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Password:</label>
+            <div className="col-sm-10">
+              <input
+                placeholder="Password"
+                className="form-control"
+                type="text"
+                name="password"
+                value={password}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Is Admin?</label>
+            <div className="col-sm-10 divcheck">
+              <input
+                type="checkbox"
+                name="admin"
+                value={admin}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">DNI:</label>
+            <div className="col-sm-10">
+              <input
+                placeholder="DNI"
+                className="form-control"
+                type="text"
+                name="DNI"
+                value={DNI}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">NAF:</label>
+            <div className="col-sm-10">
+              <input
+                placeholder="NAF"
+                className="form-control"
+                type="text"
+                name="NAF"
+                value={NAF}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Nationality:</label>
+            <div className="col-sm-10">
+              <input
+                placeholder="Nationality"
+                className="form-control"
+                type="text"
+                name="nationality"
+                value={nationality}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Genre</label>
+            <div className="col-sm-10">
+              <select
+                className="form-control"
+                name="genre"
+                value={genre}
+                onChange={this.handleChange}
+              >
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Address:</label>
+            <div className="col-sm-10">
+              <input
+                placeholder="Address"
+                className="form-control"
+                type="text"
+                name="address"
+                value={address}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Postal Code:</label>
+            <div className="col-sm-10">
+              <input
+                placeholder="Postal Code"
+                className="form-control"
+                type="text"
+                name="postalCode"
+                value={postalCode}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Country:</label>
+            <div className="col-sm-10">
+              <input
+                placeholder="Country"
+                className="form-control"
+                type="text"
+                name="country"
+                value={country}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Birth Date:</label>
+            <div className="col-sm-10">
+              <input
+                placeholder="Birth Date"
+                className="form-control"
+                type="date"
+                name="birthDate"
+                value={birthDate}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="buttonDiv">
+            <p>{this.state.error}</p> {/* muestras el mensaje de error  */}
+            <button
+              type="submit"
+              disabled={
+                !!this.state.error
+                /* se desabilita el button cuando hay un error */
+              }
+              className="btn buttonprofile"
+            >
+              Submit Employee
+            </button>
+          </div>
+        </form>
       </div>
     );
   }

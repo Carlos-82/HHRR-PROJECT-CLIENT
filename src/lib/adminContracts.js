@@ -8,9 +8,9 @@ class Contracts {
     });
   }
 
-  contractCreate(id, newContract) {
+  contractCreate({ employeeId, newContract }) {
     return this.contract
-      .post(`/employee/${id}/contract/create`, newContract)
+      .post(`/employee/${employeeId}/contract/create`, newContract)
       .then(({ data }) => data);
   }
 
@@ -20,9 +20,9 @@ class Contracts {
       .then(({ data }) => data);
   }
 
-  editContract(employeeId, contractId, updatedContract) {
+  editContract({ employeeId, contractId, updatedContract }) {
     return this.contract
-      .get(
+      .patch(
         `/employee/${employeeId}/contract/${contractId}/editContract`,
         updatedContract
       )

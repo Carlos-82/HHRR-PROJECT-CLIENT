@@ -34,7 +34,13 @@ class App extends Component {
 
           <Switch>
             <PrivateRoute
+              component={EditContract}
+              exact
+              path="/admin/employee/:employeeId/contract/:contractId/editcontract"
+            />
+            <PrivateRoute
               component={UserEdit}
+              exact
               path="/user/:userId/editprofile"
             />
             <PrivateRoute component={UserProfile} path="/user/:userId" />
@@ -62,11 +68,6 @@ class App extends Component {
               component={EmployeeInformation}
               exact
               path="/admin/employee/:id"
-            />
-            <PrivateRoute
-              component={EditContract}
-              exact
-              path="/admin/employee/:employeeId/contract/:contractId/editcontract`"
             />
             <PrivateRoute
               component={ContractCreate}

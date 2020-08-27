@@ -59,8 +59,9 @@ class ContractCreate extends Component {
     const { employeeId } = this.props.match.params;
 
     adminContracts
-      .contractCreate(employeeId, newContract)
-      .then(this.props.history.push("/Admin"))
+      .contractCreate({ employeeId, newContract })
+      .then(this.setState(newContract))
+      .then(this.props.history.push(`/admin/employee/${employeeId}/contract`))
       .catch(() => {
         this.setState({
           error: "There was an error during the contract creation",
@@ -92,173 +93,193 @@ class ContractCreate extends Component {
       vacationDays,
       aditionalClauses,
     } = this.state;
-    console.log("jojojo", this.state);
     return (
-      <div className="container">
-        <section className="section">
-          <div className="page-body">
-            <h3 className="">Contract Form</h3>
-            <form onSubmit={this.handleFormSubmit}>
-              <div className="field">
-                <label className="label">Start Date:</label>
-                <input
-                  className="input"
-                  type="date"
-                  name="startDate"
-                  value={startDate}
-                  onChange={this.handleChange}
-                />
-              </div>
+      <div className="containerform">
+        <h3 className="">Contract Form</h3>
 
-              <div className="field">
-                <label className="label">End Date: </label>
-                <input
-                  className="input"
-                  type="date"
-                  name="endDate"
-                  value={endDate}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">Contract Type:</label>
-                <input
-                  className="input"
-                  type="text"
-                  name="contractType"
-                  value={contractType}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">Contract Code:</label>
-                <input
-                  className="input"
-                  type="number"
-                  name="contractCode"
-                  value={contractCode}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">Work per Day:</label>
-                <input
-                  className="input"
-                  type="text"
-                  name="WorkDay"
-                  value={workDay}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">Work Hours:</label>
-                <input
-                  className="input"
-                  type="number"
-                  name="workHours"
-                  value={workHours}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">Category: </label>
-                <input
-                  className="input"
-                  type="text"
-                  name="category"
-                  value={category}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">Job Role: </label>
-                <input
-                  className="input"
-                  type="text"
-                  name="jobRole"
-                  value={jobRole}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">Salary: </label>
-                <input
-                  className="input"
-                  type="number"
-                  name="salary"
-                  value={salary}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">Bonus: </label>
-                <input
-                  className="input"
-                  type="number"
-                  name="bonus"
-                  value={bonus}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">Education Level:</label>
-                <input
-                  className="input"
-                  type="text"
-                  name="educationLevel"
-                  value={educationLevel}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">Vacation Days:</label>
-                <input
-                  className="input"
-                  type="number"
-                  name="vacationDays"
-                  value={vacationDays}
-                  onChange={this.handleChange}
-                />
-              </div>
-
-              <div className="field">
-                <label className="label">Aditional Clauses:</label>
-                <textarea
-                  name="adtionalClauses"
-                  className="textArea"
-                  value={aditionalClauses}
-                  onChange={this.handleChange}
-                  cols="30"
-                  rows="10"
-                />{" "}
-              </div>
-
-              <div className="buttonDiv">
-                <p>{this.state.error}</p> {/* muestras el mensaje de error  */}
-                <button
-                  type="submit"
-                  disabled={
-                    !!this.state.error
-                    /* se desabilita el button cuando hay un error */
-                  }
-                  className="button"
-                >
-                  Submit Contract
-                </button>
-              </div>
-            </form>
+        <form onSubmit={this.handleFormSubmit}>
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Start Date:</label>
+            <div className="col-sm-10">
+              <input
+                className="form-control"
+                type="date"
+                name="startDate"
+                value={startDate}
+                onChange={this.handleChange}
+              />
+            </div>
           </div>
-        </section>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">End Date</label>
+            <div className="col-sm-10">
+              <input
+                className="form-control"
+                type="date"
+                name="endDate"
+                value={endDate}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Contract Type:</label>
+            <div className="col-sm-10">
+              <input
+                className="form-control"
+                type="text"
+                name="contractType"
+                value={contractType}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Contract Code:</label>
+            <div className="col-sm-10">
+              <input
+                className="form-control"
+                type="number"
+                name="contractCode"
+                value={contractCode}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Category:</label>
+            <div className="col-sm-10">
+              <input
+                className="form-control"
+                type="text"
+                name="category"
+                value={category}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Job Role:</label>
+            <div className="col-sm-10">
+              <input
+                className="form-control"
+                type="text"
+                name="jobRole"
+                value={jobRole}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Work Day:</label>
+            <div className="col-sm-10">
+              <input
+                className="form-control"
+                type="text"
+                name="workDay"
+                value={workDay}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Work Hpurs:</label>
+            <div className="col-sm-10">
+              <input
+                className="form-control"
+                type="number"
+                name="workHours"
+                value={workHours}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Salary:</label>
+            <div className="col-sm-10">
+              <input
+                className="form-control"
+                type="number"
+                name="salary"
+                value={salary}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Bonus:</label>
+            <div className="col-sm-10">
+              <input
+                className="form-control"
+                type="number"
+                name="bonus"
+                value={bonus}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Education:</label>
+            <div className="col-sm-10">
+              <input
+                className="form-control"
+                type="text"
+                name="educationLevel"
+                value={educationLevel}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Vacations:</label>
+            <div className="col-sm-10">
+              <input
+                className="form-control"
+                type="number"
+                name="vacationDays"
+                value={vacationDays}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label className="label">Aditional Clauses:</label>
+            <textarea
+              name="adtionalClauses"
+              className="form-control"
+              value={aditionalClauses}
+              onChange={this.handleChange}
+              cols="30"
+              rows="10"
+            />{" "}
+          </div>
+
+          <div className="buttoncompany">
+            <p>{this.state.error}</p> {/* muestras el mensaje de error  */}
+            <button
+              type="submit"
+              disabled={
+                !!this.state.error
+                /* se desabilita el button cuando hay un error */
+              }
+              className="buttonprofile btn"
+            >
+              Submit Contract
+            </button>
+          </div>
+        </form>
       </div>
     );
   }

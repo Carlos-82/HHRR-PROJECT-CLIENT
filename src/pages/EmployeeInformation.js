@@ -21,7 +21,7 @@ class EmployeeInformation extends Component {
         this.setState({ employee });
       })
       .catch(() => {
-        this.setState({ error: "Sorry but we can't acces to the Company" }); //setetas el mensaje de error
+        this.setState({ error: "Sorry but we can't acces to the Employee" }); //setetas el mensaje de error
       });
   }
 
@@ -38,33 +38,37 @@ class EmployeeInformation extends Component {
     const employee = this.state.employee; //aqui leo lo de la linea 21
     return employee ? (
       <div>
-        <h2>
-          {employee.firstName} {employee.lastName}
-        </h2>
-        <p>DNI: {employee.DNI}</p>
-        <p>NAF: {employee.NAF}</p>
-        <p>Nationality: {employee.nationality}</p>
-        <p>Genre: {employee.genre}</p>
-        <p>Address: {employee.address}</p>
-        <p>Postal Code: {employee.postalCode}</p>
-        <p>Country: {employee.country}</p>
-        <p>Birth Date: {employee.birthDate}</p>
-        <p>Is Admin? {employee.admin ? "Yes" : "No"}</p>
-        <p>Email: {employee.email}</p>
-
-        <Link to={`/admin/employee/${employee._id}/editemployee`}>
-          <button>Edit Employee</button>
-        </Link>
-        <Link to={`/admin/employee/${employee._id}/contract`}>
-          <button>Contracts</button>
-        </Link>
-
-        {this.props.user && employee.id !== this.props.user.id && (
-          <button
-            className="button"
-            onClick={() => this.delete(employee._id)}
-          ></button>
-        )}
+        <div className="card">
+          <div className="card-header">
+            <h2>{`${employee.firstName} ${employee.lastName || ""}`}</h2>
+          </div>
+          <div className="list-group list-group-flush">
+            <p className="list-group-item">DNI: {employee.DNI}</p>
+            <p className="list-group-item">NAF: {employee.NAF}</p>
+            <p className="list-group-item">
+              Nationality: {employee.nationality}
+            </p>
+            <p className="list-group-item">Birth Date: {employee.birthDate}</p>
+            <p className="list-group-item">Email: {employee.email}</p>
+            <p className="list-group-item">Genre: {employee.genre}</p>
+            <p className="list-group-item">Address: {employee.address}</p>
+            <p className="list-group-item">
+              Postal Code: {employee.postalCode}
+            </p>
+            <p className="list-group-item">Country: {employee.country}</p>
+            <p className="list-group-item">
+              Is Admin? {employee.admin ? "Yes" : "No"}
+            </p>
+          </div>
+        </div>
+        <div className="buttoncontainer buttoncompany">
+          <Link to={`/admin/employee/${employee._id}/editemployee`}>
+            <button className="buttonedit btn btn-lg ">Edit Employee</button>
+          </Link>
+          <Link to={`/admin/employee/${employee._id}/contract`}>
+            <button className=" buttonprofile btn btn-lg">Contracts</button>
+          </Link>
+        </div>
       </div>
     ) : (
       <div>

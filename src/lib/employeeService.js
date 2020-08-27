@@ -18,9 +18,9 @@ class Employee {
     return this.user.get(`/${userId}`).then(({ data }) => data);
   }
 
-  editProfile(userId, editedProfile) {
+  editProfile({ userId, editedProfile }) {
     return this.user
-      .get(`/${userId}/editProfile`, editedProfile)
+      .patch(`/${userId}/editProfile`, editedProfile)
       .then(({ data }) => data);
   }
 }
