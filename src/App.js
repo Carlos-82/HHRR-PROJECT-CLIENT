@@ -29,9 +29,8 @@ class App extends Component {
   render() {
     return (
       <AuthProvider>
+        <Navbar />
         <div className="container">
-          <Navbar />
-
           <Switch>
             <PrivateRoute
               component={EditContract}

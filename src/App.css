@@ -14,6 +14,11 @@ html {
 
 .container {
   padding: 0;
+  text-align: center;
+}
+
+.homediv {
+  margin-top: 100px;
 }
 
 .navbar {
@@ -36,8 +41,12 @@ nav.navbar .navbar-user {
 .logo {
   width: 100px;
 }
+
+.homelogo {
+  width: 200px;
+}
 button.navbar-button {
-  padding: 5px 20px;
+  padding: 5px 10px;
   width: 100px;
   border-radius: 3px;
   margin: 0 10px;
@@ -93,4 +102,23 @@ form {
 
 .divcheck {
   text-align: left;
+}
+
+@media (min-width: 768px) {
+  .homelogo {
+    width: 400px;
+  }
+
+  button.navbar-button {
+    padding: 5px 20px;
+  }
+  .tittle {
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .tittle {
+    font-size: 70px;
+  }
 }
